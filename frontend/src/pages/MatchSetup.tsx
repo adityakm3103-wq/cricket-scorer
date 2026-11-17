@@ -173,19 +173,19 @@ export const MatchSetup: React.FC = () => {
     <div className="max-w-5xl mx-auto space-y-8 py-4">
       {/* Header */}
       <div className="text-center space-y-2">
-        <span className="text-xs font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+        <span className="text-xs font-bold text-amber-500 dark:text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
           Admin Match Configuration • Step 2 of 4
         </span>
-        <h1 className="text-3xl font-black text-white tracking-tight">
+        <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
           Configure Match & Playing XIs
         </h1>
-        <p className="text-xs text-slate-400 max-w-lg mx-auto">
-          Format: <strong className="text-emerald-400">{formatParam}</strong>. Select the competing registered teams and designate both Playing XIs.
+        <p className="text-xs text-slate-600 dark:text-slate-400 max-w-lg mx-auto">
+          Format: <strong className="text-emerald-600 dark:text-emerald-400">{formatParam}</strong>. Select the competing registered teams and designate both Playing XIs.
         </p>
       </div>
 
       {error && (
-        <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs flex items-center gap-2">
+        <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-xs flex items-center gap-2">
           <AlertCircle className="w-5 h-5 shrink-0" />
           <span>{error}</span>
         </div>
@@ -193,22 +193,22 @@ export const MatchSetup: React.FC = () => {
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Match Configuration Details */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-7 shadow-xl space-y-5">
-          <h2 className="text-base font-bold text-white flex items-center gap-2 pb-3 border-b border-slate-800">
-            <Trophy className="w-4 h-4 text-emerald-400" />
+        <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-xl space-y-5">
+          <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 pb-3 border-b border-slate-200 dark:border-slate-800">
+            <Trophy className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
             Match Details & Competing Teams
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                 Team A (Home)
               </label>
               <select
                 required
                 value={teamAId}
                 onChange={e => handleTeamAChange(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"
+                className="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               >
                 <option value="">Select Team A</option>
                 {teams?.map((team: any) => (
@@ -220,14 +220,14 @@ export const MatchSetup: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                 Team B (Away)
               </label>
               <select
                 required
                 value={teamBId}
                 onChange={e => handleTeamBChange(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"
+                className="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               >
                 <option value="">Select Team B</option>
                 {teams
@@ -241,7 +241,7 @@ export const MatchSetup: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                 Match Date
               </label>
               <input
@@ -249,12 +249,12 @@ export const MatchSetup: React.FC = () => {
                 required
                 value={matchDate}
                 onChange={e => setMatchDate(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"
+                className="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                 Venue (Optional)
               </label>
               <input
@@ -262,7 +262,7 @@ export const MatchSetup: React.FC = () => {
                 value={venue}
                 onChange={e => setVenue(e.target.value)}
                 placeholder="e.g. Wankhede Stadium"
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                className="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               />
             </div>
           </div>
@@ -271,13 +271,13 @@ export const MatchSetup: React.FC = () => {
         {/* Playing XI Selection Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Team A Playing XI */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
               <div>
-                <h3 className="font-bold text-white text-sm">
+                <h3 className="font-bold text-slate-900 dark:text-white text-sm">
                   {selectedTeamA ? selectedTeamA.teamName : 'Team A'} XI
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   {teamAId ? 'Select playing squad' : 'Select Team A above'}
                 </p>
               </div>
@@ -286,8 +286,8 @@ export const MatchSetup: React.FC = () => {
                   <span
                     className={`text-xs font-bold px-2.5 py-1 rounded-full ${
                       teamAPlayingXI.length === 11
-                        ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                        : 'bg-slate-800 text-slate-300'
+                        ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                     }`}
                   >
                     {teamAPlayingXI.length} / 11 Selected
@@ -295,7 +295,7 @@ export const MatchSetup: React.FC = () => {
                   <button
                     type="button"
                     onClick={selectFirst11TeamA}
-                    className="text-[11px] text-emerald-400 hover:underline"
+                    className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline"
                   >
                     Auto Pick 11
                   </button>
@@ -314,17 +314,17 @@ export const MatchSetup: React.FC = () => {
                         onClick={() => toggleTeamAPlayer(player.id)}
                         className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                           isSelected
-                            ? 'bg-emerald-500/15 border-emerald-500/60 text-white'
-                            : 'bg-slate-800/40 border-slate-700/60 hover:bg-slate-800 text-slate-300'
+                            ? 'bg-emerald-50 dark:bg-emerald-500/15 border-emerald-500/60 text-slate-900 dark:text-white shadow-sm'
+                            : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center font-bold font-mono text-xs text-emerald-400">
+                          <div className="w-8 h-8 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center font-bold font-mono text-xs text-emerald-600 dark:text-emerald-400 shadow-sm">
                             #{player.jerseyNumber}
                           </div>
                           <div>
-                            <div className="font-bold text-sm">{player.playerName}</div>
-                            <div className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">
+                            <div className="font-bold text-sm text-slate-900 dark:text-white">{player.playerName}</div>
+                            <div className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                               {player.role.replace('_', ' ')}
                             </div>
                           </div>
@@ -334,7 +334,7 @@ export const MatchSetup: React.FC = () => {
                           className={`w-5 h-5 rounded-md flex items-center justify-center border transition-colors ${
                             isSelected
                               ? 'bg-emerald-500 border-emerald-400 text-slate-950'
-                              : 'border-slate-700'
+                              : 'border-slate-300 dark:border-slate-700'
                           }`}
                         >
                           {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
@@ -358,13 +358,13 @@ export const MatchSetup: React.FC = () => {
           </div>
 
           {/* Team B Playing XI */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
               <div>
-                <h3 className="font-bold text-white text-sm">
+                <h3 className="font-bold text-slate-900 dark:text-white text-sm">
                   {selectedTeamB ? selectedTeamB.teamName : 'Team B'} XI
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   {teamBId ? 'Select playing squad' : 'Select Team B above'}
                 </p>
               </div>
@@ -373,8 +373,8 @@ export const MatchSetup: React.FC = () => {
                   <span
                     className={`text-xs font-bold px-2.5 py-1 rounded-full ${
                       teamBPlayingXI.length === 11
-                        ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                        : 'bg-slate-800 text-slate-300'
+                        ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                     }`}
                   >
                     {teamBPlayingXI.length} / 11 Selected
@@ -382,7 +382,7 @@ export const MatchSetup: React.FC = () => {
                   <button
                     type="button"
                     onClick={selectFirst11TeamB}
-                    className="text-[11px] text-emerald-400 hover:underline"
+                    className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline"
                   >
                     Auto Pick 11
                   </button>
@@ -401,17 +401,17 @@ export const MatchSetup: React.FC = () => {
                         onClick={() => toggleTeamBPlayer(player.id)}
                         className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                           isSelected
-                            ? 'bg-emerald-500/15 border-emerald-500/60 text-white'
-                            : 'bg-slate-800/40 border-slate-700/60 hover:bg-slate-800 text-slate-300'
+                            ? 'bg-emerald-50 dark:bg-emerald-500/15 border-emerald-500/60 text-slate-900 dark:text-white shadow-sm'
+                            : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center font-bold font-mono text-xs text-blue-400">
+                          <div className="w-8 h-8 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center font-bold font-mono text-xs text-blue-600 dark:text-blue-400 shadow-sm">
                             #{player.jerseyNumber}
                           </div>
                           <div>
-                            <div className="font-bold text-sm">{player.playerName}</div>
-                            <div className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">
+                            <div className="font-bold text-sm text-slate-900 dark:text-white">{player.playerName}</div>
+                            <div className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                               {player.role.replace('_', ' ')}
                             </div>
                           </div>
@@ -421,7 +421,7 @@ export const MatchSetup: React.FC = () => {
                           className={`w-5 h-5 rounded-md flex items-center justify-center border transition-colors ${
                             isSelected
                               ? 'bg-emerald-500 border-emerald-400 text-slate-950'
-                              : 'border-slate-700'
+                              : 'border-slate-300 dark:border-slate-700'
                           }`}
                         >
                           {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}

@@ -1052,17 +1052,17 @@ export const GullyLiveScoring: React.FC = () => {
       {/* MODAL: BYE / LEG-BYE                                                     */}
       {/* ========================================================================= */}
       {isByeModalOpen && (
-        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="font-bold text-base text-white flex items-center gap-2">
-                <Clock className="w-4 h-4 text-teal-400" />
+        <div className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in transition-colors">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+              <h3 className="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                <Clock className="w-4 h-4 text-teal-600 dark:text-teal-400" />
                 {byeModalType === 'BYE' ? 'Record Bye' : 'Record Leg-Bye'}
               </h3>
               <button
                 type="button"
                 onClick={() => setIsByeModalOpen(false)}
-                className="p-1 rounded-xl bg-slate-800 text-slate-400 hover:text-white"
+                className="p-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1074,8 +1074,8 @@ export const GullyLiveScoring: React.FC = () => {
                 onClick={() => setByeModalType('BYE')}
                 className={`py-2 px-3 rounded-xl text-xs font-bold border text-center transition-all ${
                   byeModalType === 'BYE'
-                    ? 'bg-teal-500/20 border-teal-500 text-teal-300'
-                    : 'bg-slate-950 border-slate-800 text-slate-400'
+                    ? 'bg-teal-50 dark:bg-teal-500/20 border-teal-500 text-teal-700 dark:text-teal-300'
+                    : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
                 }`}
               >
                 Bye
@@ -1085,16 +1085,22 @@ export const GullyLiveScoring: React.FC = () => {
                 onClick={() => setByeModalType('LEG_BYE')}
                 className={`py-2 px-3 rounded-xl text-xs font-bold border text-center transition-all ${
                   byeModalType === 'LEG_BYE'
-                    ? 'bg-teal-500/20 border-teal-500 text-teal-300'
-                    : 'bg-slate-950 border-slate-800 text-slate-400'
+                    ? 'bg-teal-50 dark:bg-teal-500/20 border-teal-500 text-teal-700 dark:text-teal-300'
+                    : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
                 }`}
               >
                 Leg-Bye
               </button>
             </div>
 
-            <div className="grid grid-cols-4 gap-2 pt-2">
-              {[1, 2, 3, 4].map(r => (
+            <div className="text-center py-1">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Select completed runs (0–6). Odd runs rotate strike in Team matches. 0 runs credited to striker and bowler.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-4 sm:grid-cols-7 gap-2 pt-2">
+              {[0, 1, 2, 3, 4, 5, 6].map(r => (
                 <button
                   key={r}
                   type="button"
@@ -1106,9 +1112,13 @@ export const GullyLiveScoring: React.FC = () => {
                     });
                     setIsByeModalOpen(false);
                   }}
-                  className="py-3 rounded-xl font-black text-sm bg-slate-950 hover:bg-teal-600 hover:text-slate-950 text-white border border-slate-800 transition-all"
+                  disabled={scoreMutation.isPending}
+                  className="flex flex-col items-center justify-center py-3 rounded-xl bg-slate-50 dark:bg-slate-950 hover:bg-teal-600 hover:text-white dark:hover:bg-teal-500 dark:hover:text-slate-950 text-slate-900 dark:text-white font-black text-sm border border-slate-200 dark:border-slate-800 transition-all active:scale-95 group shadow-sm"
                 >
-                  +{r} Run{r > 1 ? 's' : ''}
+                  <span>{r}</span>
+                  <span className="text-[9px] font-semibold opacity-70 group-hover:opacity-100">
+                    {r === 0 ? 'Dot' : r === 1 ? 'Single' : r === 4 ? 'Four' : r === 6 ? 'Six' : `${r}r`}
+                  </span>
                 </button>
               ))}
             </div>

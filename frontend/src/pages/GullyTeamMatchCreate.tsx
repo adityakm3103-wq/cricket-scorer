@@ -216,15 +216,15 @@ export const GullyTeamMatchCreate: React.FC = () => {
         <div className="hidden sm:flex items-center gap-2">
           <span
             className={`px-3 py-1 rounded-xl text-xs font-bold ${
-              step === 1 ? 'bg-amber-500 text-slate-950' : 'bg-slate-800 text-slate-400'
+              step === 1 ? 'bg-amber-500 text-slate-950' : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
             }`}
           >
             1. Form Teams
           </span>
-          <span className="text-slate-600">→</span>
+          <span className="text-slate-400 dark:text-slate-600">→</span>
           <span
             className={`px-3 py-1 rounded-xl text-xs font-bold ${
-              step === 2 ? 'bg-amber-500 text-slate-950' : 'bg-slate-800 text-slate-400'
+              step === 2 ? 'bg-amber-500 text-slate-950' : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
             }`}
           >
             2. Overs & Toss
@@ -233,7 +233,7 @@ export const GullyTeamMatchCreate: React.FC = () => {
       </div>
 
       {errorMessage && (
-        <div className="bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs p-3.5 rounded-2xl flex items-center gap-2.5">
+        <div className="bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs p-3.5 rounded-2xl flex items-center gap-2.5">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{errorMessage}</span>
         </div>
@@ -242,16 +242,16 @@ export const GullyTeamMatchCreate: React.FC = () => {
       {step === 1 && (
         <div className="space-y-6">
           {/* Action Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl shadow-sm">
             <div>
-              <div className="text-sm font-bold text-white">Registered Squad ({allPlayers.length} players)</div>
-              <div className="text-xs text-slate-400">
+              <div className="text-sm font-bold text-slate-900 dark:text-white">Registered Squad ({allPlayers.length} players)</div>
+              <div className="text-xs text-slate-600 dark:text-slate-400">
                 Click "Move to A" or "Move to B" to divide your squad. You can have unequal team sizes.
               </div>
             </div>
             <button
               onClick={autoSplitSquad}
-              className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 transition-all"
+              className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-amber-600 dark:text-amber-400 border border-amber-500/30 transition-all shadow-sm"
             >
               <Sparkles className="w-3.5 h-3.5" /> Auto-Split Squad 50/50
             </button>
@@ -260,35 +260,35 @@ export const GullyTeamMatchCreate: React.FC = () => {
           {/* Teams Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Team A */}
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-4 shadow-xl">
-              <div className="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
+            <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 space-y-4 shadow-xl">
+              <div className="flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-3">
                 <div className="flex-1">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
                     Team A Name
                   </label>
                   <input
                     type="text"
                     value={teamAName}
                     onChange={e => setTeamAName(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 rounded-xl px-3 py-1.5 text-sm font-bold text-white mt-1 focus:outline-none"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 focus:border-emerald-500 rounded-xl px-3 py-1.5 text-sm font-bold text-slate-900 dark:text-white mt-1 focus:outline-none"
                     placeholder="Team A Name"
                   />
                 </div>
                 <div className="text-right">
-                  <span className="text-xs font-semibold text-slate-400">Count</span>
-                  <div className="text-xl font-black text-emerald-400">{teamAPlayerIds.length}</div>
+                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Count</span>
+                  <div className="text-xl font-black text-emerald-600 dark:text-emerald-400">{teamAPlayerIds.length}</div>
                 </div>
               </div>
 
               {/* Captain selector */}
               {teamAPlayerIds.length > 0 && (
                 <div className="flex items-center gap-2 text-xs">
-                  <Crown className="w-3.5 h-3.5 text-amber-400" />
-                  <span className="text-slate-400">Captain:</span>
+                  <Crown className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
+                  <span className="text-slate-600 dark:text-slate-400">Captain:</span>
                   <select
                     value={teamACaptainId}
                     onChange={e => setTeamACaptainId(e.target.value)}
-                    className="bg-slate-950 border border-slate-700 text-xs text-white rounded-lg px-2 py-1 focus:outline-none"
+                    className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white rounded-lg px-2 py-1 focus:outline-none"
                   >
                     <option value="">Select Captain</option>
                     {teamAPlayerIds.map(pId => {
@@ -306,7 +306,7 @@ export const GullyTeamMatchCreate: React.FC = () => {
               {/* Player list */}
               <div className="space-y-2 min-h-[180px]">
                 {teamAPlayerIds.length === 0 ? (
-                  <div className="text-center py-10 text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">
+                  <div className="text-center py-10 text-slate-400 dark:text-slate-500 text-xs border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
                     No players in Team A yet
                   </div>
                 ) : (
@@ -316,16 +316,16 @@ export const GullyTeamMatchCreate: React.FC = () => {
                     return (
                       <div
                         key={p.id}
-                        className="flex items-center justify-between p-2.5 bg-slate-950/60 border border-slate-800/80 rounded-xl text-xs"
+                        className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 rounded-xl text-xs"
                       >
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-slate-500 font-bold">#{p.jerseyNumber}</span>
-                          <span className="font-bold text-white">{p.playerName}</span>
-                          <span className="text-[10px] text-slate-400 px-1.5 py-0.5 rounded bg-slate-800">
+                          <span className="font-mono text-slate-400 dark:text-slate-500 font-bold">#{p.jerseyNumber}</span>
+                          <span className="font-bold text-slate-900 dark:text-white">{p.playerName}</span>
+                          <span className="text-[10px] text-slate-600 dark:text-slate-400 px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800">
                             {p.role}
                           </span>
                           {teamACaptainId === p.id && (
-                            <span className="text-[10px] text-amber-400 font-bold flex items-center gap-0.5">
+                            <span className="text-[10px] text-amber-600 dark:text-amber-400 font-bold flex items-center gap-0.5">
                               <Crown className="w-3 h-3" /> (C)
                             </span>
                           )}
@@ -334,14 +334,14 @@ export const GullyTeamMatchCreate: React.FC = () => {
                           <button
                             onClick={() => moveToTeamB(p.id)}
                             title="Move to Team B"
-                            className="p-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
+                            className="p-1 rounded-lg bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300"
                           >
                             <ArrowLeftRight className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => removeFromTeams(p.id)}
                             title="Remove"
-                            className="p-1 rounded-lg bg-slate-800 hover:bg-rose-900/40 text-slate-400 hover:text-rose-400"
+                            className="p-1 rounded-lg bg-slate-200 hover:bg-rose-100 dark:bg-slate-800 dark:hover:bg-rose-900/40 text-slate-500 hover:text-rose-600 dark:text-slate-400 dark:hover:text-rose-400"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -354,35 +354,35 @@ export const GullyTeamMatchCreate: React.FC = () => {
             </div>
 
             {/* Team B */}
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-4 shadow-xl">
-              <div className="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
+            <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 space-y-4 shadow-xl">
+              <div className="flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-3">
                 <div className="flex-1">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-cyan-400">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
                     Team B Name
                   </label>
                   <input
                     type="text"
                     value={teamBName}
                     onChange={e => setTeamBName(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-700 focus:border-cyan-500 rounded-xl px-3 py-1.5 text-sm font-bold text-white mt-1 focus:outline-none"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 focus:border-cyan-500 rounded-xl px-3 py-1.5 text-sm font-bold text-slate-900 dark:text-white mt-1 focus:outline-none"
                     placeholder="Team B Name"
                   />
                 </div>
                 <div className="text-right">
-                  <span className="text-xs font-semibold text-slate-400">Count</span>
-                  <div className="text-xl font-black text-cyan-400">{teamBPlayerIds.length}</div>
+                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Count</span>
+                  <div className="text-xl font-black text-cyan-600 dark:text-cyan-400">{teamBPlayerIds.length}</div>
                 </div>
               </div>
 
               {/* Captain selector */}
               {teamBPlayerIds.length > 0 && (
                 <div className="flex items-center gap-2 text-xs">
-                  <Crown className="w-3.5 h-3.5 text-amber-400" />
-                  <span className="text-slate-400">Captain:</span>
+                  <Crown className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
+                  <span className="text-slate-600 dark:text-slate-400">Captain:</span>
                   <select
                     value={teamBCaptainId}
                     onChange={e => setTeamBCaptainId(e.target.value)}
-                    className="bg-slate-950 border border-slate-700 text-xs text-white rounded-lg px-2 py-1 focus:outline-none"
+                    className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white rounded-lg px-2 py-1 focus:outline-none"
                   >
                     <option value="">Select Captain</option>
                     {teamBPlayerIds.map(pId => {
@@ -400,7 +400,7 @@ export const GullyTeamMatchCreate: React.FC = () => {
               {/* Player list */}
               <div className="space-y-2 min-h-[180px]">
                 {teamBPlayerIds.length === 0 ? (
-                  <div className="text-center py-10 text-slate-500 text-xs border border-dashed border-slate-800 rounded-2xl">
+                  <div className="text-center py-10 text-slate-400 dark:text-slate-500 text-xs border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
                     No players in Team B yet
                   </div>
                 ) : (
@@ -410,16 +410,16 @@ export const GullyTeamMatchCreate: React.FC = () => {
                     return (
                       <div
                         key={p.id}
-                        className="flex items-center justify-between p-2.5 bg-slate-950/60 border border-slate-800/80 rounded-xl text-xs"
+                        className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 rounded-xl text-xs"
                       >
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-slate-500 font-bold">#{p.jerseyNumber}</span>
-                          <span className="font-bold text-white">{p.playerName}</span>
-                          <span className="text-[10px] text-slate-400 px-1.5 py-0.5 rounded bg-slate-800">
+                          <span className="font-mono text-slate-400 dark:text-slate-500 font-bold">#{p.jerseyNumber}</span>
+                          <span className="font-bold text-slate-900 dark:text-white">{p.playerName}</span>
+                          <span className="text-[10px] text-slate-600 dark:text-slate-400 px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800">
                             {p.role}
                           </span>
                           {teamBCaptainId === p.id && (
-                            <span className="text-[10px] text-amber-400 font-bold flex items-center gap-0.5">
+                            <span className="text-[10px] text-amber-600 dark:text-amber-400 font-bold flex items-center gap-0.5">
                               <Crown className="w-3 h-3" /> (C)
                             </span>
                           )}
@@ -428,14 +428,14 @@ export const GullyTeamMatchCreate: React.FC = () => {
                           <button
                             onClick={() => moveToTeamA(p.id)}
                             title="Move to Team A"
-                            className="p-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
+                            className="p-1 rounded-lg bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300"
                           >
                             <ArrowLeftRight className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => removeFromTeams(p.id)}
                             title="Remove"
-                            className="p-1 rounded-lg bg-slate-800 hover:bg-rose-900/40 text-slate-400 hover:text-rose-400"
+                            className="p-1 rounded-lg bg-slate-200 hover:bg-rose-100 dark:bg-slate-800 dark:hover:bg-rose-900/40 text-slate-500 hover:text-rose-600 dark:text-slate-400 dark:hover:text-rose-400"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -450,31 +450,31 @@ export const GullyTeamMatchCreate: React.FC = () => {
 
           {/* Unassigned Players Bank */}
           {unassignedPlayers.length > 0 && (
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-3">
-              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 space-y-3 shadow-md">
+              <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 Unassigned Players ({unassignedPlayers.length})
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
                 {unassignedPlayers.map(p => (
                   <div
                     key={p.id}
-                    className="flex items-center justify-between p-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs"
+                    className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl text-xs"
                   >
                     <div>
-                      <span className="font-mono text-slate-500 font-bold mr-1.5">#{p.jerseyNumber}</span>
-                      <span className="font-bold text-white">{p.playerName}</span>
-                      <div className="text-[10px] text-slate-400">{p.role}</div>
+                      <span className="font-mono text-slate-400 dark:text-slate-500 font-bold mr-1.5">#{p.jerseyNumber}</span>
+                      <span className="font-bold text-slate-900 dark:text-white">{p.playerName}</span>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{p.role}</div>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => moveToTeamA(p.id)}
-                        className="px-2 py-1 rounded bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-bold text-[10px] border border-emerald-500/30"
+                        className="px-2 py-1 rounded bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-bold text-[10px] border border-emerald-500/30"
                       >
                         + A
                       </button>
                       <button
                         onClick={() => moveToTeamB(p.id)}
-                        className="px-2 py-1 rounded bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 font-bold text-[10px] border border-cyan-500/30"
+                        className="px-2 py-1 rounded bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 font-bold text-[10px] border border-cyan-500/30"
                       >
                         + B
                       </button>
@@ -507,20 +507,20 @@ export const GullyTeamMatchCreate: React.FC = () => {
       {step === 2 && (
         <div className="space-y-6">
           {/* Overs Configuration */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
+          <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-amber-400" />
+                <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-amber-500 dark:text-amber-400" />
                   Custom Overs Configuration
                 </h3>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                   Gully Cricket has completely flexible overs. Select a quick preset or type any custom number of overs.
                 </p>
               </div>
               <div className="text-right">
-                <span className="text-2xl font-black text-amber-400">{totalOvers}</span>
-                <span className="text-xs text-slate-400 ml-1">Overs / innings</span>
+                <span className="text-2xl font-black text-amber-500 dark:text-amber-400">{totalOvers}</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 ml-1">Overs / innings</span>
               </div>
             </div>
 
@@ -537,7 +537,7 @@ export const GullyTeamMatchCreate: React.FC = () => {
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                     totalOvers === ov
                       ? 'bg-amber-500 text-slate-950 shadow-md font-black'
-                      : 'bg-slate-950 border border-slate-800 text-slate-300 hover:border-slate-700'
+                      : 'bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700'
                   }`}
                 >
                   {ov} ov
@@ -545,7 +545,7 @@ export const GullyTeamMatchCreate: React.FC = () => {
               ))}
 
               <div className="flex items-center gap-2 ml-auto">
-                <label className="text-xs text-slate-400 font-semibold">Custom:</label>
+                <label className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Custom:</label>
                 <input
                   type="number"
                   min="1"
@@ -556,28 +556,28 @@ export const GullyTeamMatchCreate: React.FC = () => {
                     const val = parseInt(e.target.value);
                     if (val > 0) setTotalOvers(val);
                   }}
-                  className="w-16 bg-slate-950 border border-slate-700 rounded-xl px-2.5 py-1 text-sm font-bold text-white text-center focus:outline-none"
+                  className="w-16 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-2.5 py-1 text-sm font-bold text-slate-900 dark:text-white text-center focus:outline-none"
                 />
               </div>
             </div>
 
             {/* Bowling Allocation Rule */}
-            <div className="pt-4 border-t border-slate-800/80 space-y-2">
-              <label className="text-xs font-bold text-slate-300">Bowling Over Limit Rule</label>
+            <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80 space-y-2">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Bowling Over Limit Rule</label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div
                   onClick={() => setBowlingRule('MAX_LIMIT')}
                   className={`p-3 rounded-2xl border cursor-pointer transition-all ${
                     bowlingRule === 'MAX_LIMIT'
-                      ? 'bg-amber-500/10 border-amber-500/50 text-white'
-                      : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
+                      ? 'bg-amber-50 dark:bg-amber-500/10 border-amber-500/50 text-slate-900 dark:text-white'
+                      : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
                   }`}
                 >
-                  <div className="font-bold text-xs flex items-center gap-2 text-amber-400">
+                  <div className="font-bold text-xs flex items-center gap-2 text-amber-600 dark:text-amber-400">
                     <Check className={`w-3.5 h-3.5 ${bowlingRule === 'MAX_LIMIT' ? 'opacity-100' : 'opacity-0'}`} />
                     Maximum Limits (Flexible)
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-1 pl-5">
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 pl-5">
                     Allocations act as caps. Captains can distribute remaining overs as match unfolds.
                   </div>
                 </div>
@@ -586,15 +586,15 @@ export const GullyTeamMatchCreate: React.FC = () => {
                   onClick={() => setBowlingRule('EXACT')}
                   className={`p-3 rounded-2xl border cursor-pointer transition-all ${
                     bowlingRule === 'EXACT'
-                      ? 'bg-amber-500/10 border-amber-500/50 text-white'
-                      : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
+                      ? 'bg-amber-50 dark:bg-amber-500/10 border-amber-500/50 text-slate-900 dark:text-white'
+                      : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
                   }`}
                 >
-                  <div className="font-bold text-xs flex items-center gap-2 text-amber-400">
+                  <div className="font-bold text-xs flex items-center gap-2 text-amber-600 dark:text-amber-400">
                     <Check className={`w-3.5 h-3.5 ${bowlingRule === 'EXACT' ? 'opacity-100' : 'opacity-0'}`} />
                     Exact Over Allocations
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-1 pl-5">
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 pl-5">
                     Every bowler must bowl exactly the configured number of allocated overs.
                   </div>
                 </div>
@@ -603,23 +603,23 @@ export const GullyTeamMatchCreate: React.FC = () => {
           </div>
 
           {/* Toss Setup */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Trophy className="w-4 h-4 text-amber-400" />
+          <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Trophy className="w-4 h-4 text-amber-500 dark:text-amber-400" />
               Toss & Match Start
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs font-bold text-slate-300">Toss Winner</label>
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Toss Winner</label>
                 <div className="grid grid-cols-2 gap-2 mt-1.5">
                   <button
                     type="button"
                     onClick={() => setTossWinnerTeam('teamA')}
                     className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all ${
                       tossWinnerTeam === 'teamA'
-                        ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300'
-                        : 'bg-slate-950 border-slate-800 text-slate-400'
+                        ? 'bg-emerald-500/20 border-emerald-500 text-emerald-700 dark:text-emerald-300'
+                        : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
                     }`}
                   >
                     {teamAName}
@@ -629,8 +629,8 @@ export const GullyTeamMatchCreate: React.FC = () => {
                     onClick={() => setTossWinnerTeam('teamB')}
                     className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all ${
                       tossWinnerTeam === 'teamB'
-                        ? 'bg-cyan-500/20 border-cyan-500 text-cyan-300'
-                        : 'bg-slate-950 border-slate-800 text-slate-400'
+                        ? 'bg-cyan-500/20 border-cyan-500 text-cyan-700 dark:text-cyan-300'
+                        : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
                     }`}
                   >
                     {teamBName}
@@ -639,15 +639,15 @@ export const GullyTeamMatchCreate: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-300">Decision</label>
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Decision</label>
                 <div className="grid grid-cols-2 gap-2 mt-1.5">
                   <button
                     type="button"
                     onClick={() => setTossDecision('BAT')}
                     className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all ${
                       tossDecision === 'BAT'
-                        ? 'bg-amber-500/20 border-amber-500 text-amber-300'
-                        : 'bg-slate-950 border-slate-800 text-slate-400'
+                        ? 'bg-amber-500/20 border-amber-500 text-amber-700 dark:text-amber-300'
+                        : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
                     }`}
                   >
                     🏏 Bat First
@@ -657,8 +657,8 @@ export const GullyTeamMatchCreate: React.FC = () => {
                     onClick={() => setTossDecision('BOWL')}
                     className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all ${
                       tossDecision === 'BOWL'
-                        ? 'bg-amber-500/20 border-amber-500 text-amber-300'
-                        : 'bg-slate-950 border-slate-800 text-slate-400'
+                        ? 'bg-amber-500/20 border-amber-500 text-amber-700 dark:text-amber-300'
+                        : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
                     }`}
                   >
                     ⚾ Bowl First
@@ -667,28 +667,28 @@ export const GullyTeamMatchCreate: React.FC = () => {
               </div>
             </div>
 
-            <div className="text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl">
-              Batting First: <span className="font-bold text-white">{battingTeamDisplayName}</span> • Fielding First:{' '}
-              <span className="font-bold text-white">{bowlingTeamDisplayName}</span>
+            <div className="text-xs text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 p-3 rounded-xl">
+              Batting First: <span className="font-bold text-slate-900 dark:text-white">{battingTeamDisplayName}</span> • Fielding First:{' '}
+              <span className="font-bold text-slate-900 dark:text-white">{bowlingTeamDisplayName}</span>
             </div>
           </div>
 
           {/* Opening Players Selection */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Shield className="w-4 h-4 text-emerald-400" />
+          <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Shield className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
               Opening Batters & Bowler
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="text-xs font-bold text-emerald-400">
+                <label className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
                   Opening Striker ({battingTeamDisplayName})
                 </label>
                 <select
                   value={strikerId}
                   onChange={e => setStrikerId(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 text-xs text-white rounded-xl px-3 py-2 mt-1.5 focus:outline-none focus:border-emerald-500 font-bold"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white rounded-xl px-3 py-2 mt-1.5 focus:outline-none focus:border-emerald-500 font-bold"
                 >
                   <option value="">Select Striker</option>
                   {battingPlayerIds.map(pId => {
@@ -703,13 +703,13 @@ export const GullyTeamMatchCreate: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-emerald-400">
+                <label className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
                   Opening Non-Striker ({battingTeamDisplayName})
                 </label>
                 <select
                   value={nonStrikerId}
                   onChange={e => setNonStrikerId(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 text-xs text-white rounded-xl px-3 py-2 mt-1.5 focus:outline-none focus:border-emerald-500 font-bold"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white rounded-xl px-3 py-2 mt-1.5 focus:outline-none focus:border-emerald-500 font-bold"
                 >
                   <option value="">Select Non-Striker</option>
                   {battingPlayerIds.map(pId => {
@@ -724,13 +724,13 @@ export const GullyTeamMatchCreate: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-cyan-400">
+                <label className="text-xs font-bold text-cyan-600 dark:text-cyan-400">
                   Opening Bowler ({bowlingTeamDisplayName})
                 </label>
                 <select
                   value={bowlerId}
                   onChange={e => setBowlerId(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 text-xs text-white rounded-xl px-3 py-2 mt-1.5 focus:outline-none focus:border-cyan-500 font-bold"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white rounded-xl px-3 py-2 mt-1.5 focus:outline-none focus:border-cyan-500 font-bold"
                 >
                   <option value="">Select Opening Bowler</option>
                   {bowlingPlayerIds.map(pId => {
@@ -750,7 +750,7 @@ export const GullyTeamMatchCreate: React.FC = () => {
           <div className="flex items-center justify-between pt-2">
             <button
               onClick={() => setStep(1)}
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors"
             >
               <ChevronLeft className="w-4 h-4" /> Back to Teams
             </button>

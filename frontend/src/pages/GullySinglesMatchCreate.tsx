@@ -212,15 +212,15 @@ export const GullySinglesMatchCreate: React.FC = () => {
         <div>
           <Link
             to="/gully"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors mb-1"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors mb-1"
           >
             <ChevronLeft className="w-3.5 h-3.5" /> Back to Gully Dashboard
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-black text-white flex items-center gap-2.5">
-            <Shuffle className="w-7 h-7 text-orange-400" />
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white flex items-center gap-2.5">
+            <Shuffle className="w-7 h-7 text-orange-500 dark:text-orange-400" />
             Gully Singles Rounds & Draft
           </h1>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
             Every player takes turns batting alone in rounds. When a wicket falls or overs end, the next batter takes strike!
           </p>
         </div>
@@ -228,15 +228,15 @@ export const GullySinglesMatchCreate: React.FC = () => {
         <div className="hidden sm:flex items-center gap-2">
           <span
             className={`px-3 py-1 rounded-xl text-xs font-bold ${
-              step === 1 ? 'bg-orange-500 text-slate-950' : 'bg-slate-800 text-slate-400'
+              step === 1 ? 'bg-orange-500 text-slate-950' : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
             }`}
           >
             1. Batting Order & Draft
           </span>
-          <span className="text-slate-600">→</span>
+          <span className="text-slate-400 dark:text-slate-600">→</span>
           <span
             className={`px-3 py-1 rounded-xl text-xs font-bold ${
-              step === 2 ? 'bg-orange-500 text-slate-950' : 'bg-slate-800 text-slate-400'
+              step === 2 ? 'bg-orange-500 text-slate-950' : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
             }`}
           >
             2. Overs & Rules
@@ -245,7 +245,7 @@ export const GullySinglesMatchCreate: React.FC = () => {
       </div>
 
       {errorMessage && (
-        <div className="bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs p-3.5 rounded-2xl flex items-center gap-2.5">
+        <div className="bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs p-3.5 rounded-2xl flex items-center gap-2.5">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{errorMessage}</span>
         </div>
@@ -254,9 +254,9 @@ export const GullySinglesMatchCreate: React.FC = () => {
       {/* Squad size check */}
       {allPlayers.length < 2 && (
         <div className="bg-amber-500/10 border border-amber-500/30 rounded-3xl p-6 text-center space-y-3">
-          <Users className="w-10 h-10 text-amber-400 mx-auto" />
-          <h3 className="text-base font-bold text-white">Your squad has {allPlayers.length} registered player(s)</h3>
-          <p className="text-xs text-slate-400 max-w-md mx-auto">
+          <Users className="w-10 h-10 text-amber-500 dark:text-amber-400 mx-auto" />
+          <h3 className="text-base font-bold text-slate-900 dark:text-white">Your squad has {allPlayers.length} registered player(s)</h3>
+          <p className="text-xs text-slate-600 dark:text-slate-400 max-w-md mx-auto">
             Gully Singles requires at least 2 squad players so players can take turns batting and bowling against each other.
           </p>
           <Link
@@ -272,18 +272,18 @@ export const GullySinglesMatchCreate: React.FC = () => {
       {step === 1 && allPlayers.length >= 2 && (
         <div className="space-y-6">
           {/* THE GULLY DRAFT HERO */}
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-orange-950/70 via-slate-900 to-slate-900 border border-orange-500/30 p-6 sm:p-8 text-center space-y-6 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-orange-50 dark:from-orange-950/70 via-white dark:via-slate-900 to-white dark:to-slate-900 border border-orange-200 dark:border-orange-500/30 p-6 sm:p-8 text-center space-y-6 shadow-xl">
             <div className="space-y-2 max-w-xl mx-auto">
-              <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 border border-orange-500/30 inline-flex items-center gap-1.5">
-                <Sparkles className="w-3 h-3 text-orange-400" />
+              <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-orange-500/20 text-orange-600 dark:text-orange-400 border border-orange-500/30 inline-flex items-center gap-1.5">
+                <Sparkles className="w-3 h-3 text-orange-500 dark:text-orange-400" />
                 THE GULLY DRAFT
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-white">
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
                 Shuffle & Decide Batting Order
               </h2>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Run the Gully Draft to fairly shuffle which player bats 1st, 2nd, 3rd... in Round 1.
-                After Round 1 completes, the <strong className="text-orange-400">highest scorer</strong> will automatically bat first in Round 2!
+                After Round 1 completes, the <strong className="text-orange-600 dark:text-orange-400">highest scorer</strong> will automatically bat first in Round 2!
               </p>
             </div>
 
@@ -297,19 +297,19 @@ export const GullySinglesMatchCreate: React.FC = () => {
                       <Shuffle className="w-8 h-8 text-slate-950" />
                     </div>
                   </div>
-                  <div className="text-sm font-bold text-orange-400 animate-pulse">
+                  <div className="text-sm font-bold text-orange-600 dark:text-orange-400 animate-pulse">
                     Fairly Shuffling Squad Batting Queue...
                   </div>
                 </div>
               ) : draftReadyToReveal ? (
                 /* Ready to Reveal State */
-                <div className="max-w-sm mx-auto bg-slate-950 border-2 border-orange-500 rounded-3xl p-6 shadow-2xl space-y-4 animate-bounce">
-                  <div className="w-14 h-14 rounded-2xl bg-orange-500/20 border border-orange-500/40 text-orange-400 flex items-center justify-center text-2xl mx-auto">
+                <div className="max-w-sm mx-auto bg-white dark:bg-slate-950 border-2 border-orange-500 rounded-3xl p-6 shadow-2xl space-y-4 animate-bounce">
+                  <div className="w-14 h-14 rounded-2xl bg-orange-500/20 border border-orange-500/40 text-orange-500 dark:text-orange-400 flex items-center justify-center text-2xl mx-auto">
                     ❓
                   </div>
                   <div>
-                    <h3 className="text-base font-black text-white">Deck Shuffled!</h3>
-                    <p className="text-xs text-slate-400 mt-1">
+                    <h3 className="text-base font-black text-slate-900 dark:text-white">Deck Shuffled!</h3>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
                       Tap below to reveal the fair randomized batting order.
                     </p>
                   </div>
@@ -324,13 +324,13 @@ export const GullySinglesMatchCreate: React.FC = () => {
                 </div>
               ) : firstBatter ? (
                 /* 1st Batter Preview */
-                <div className="max-w-md mx-auto bg-slate-950 border-2 border-orange-500 rounded-3xl p-6 shadow-2xl space-y-3">
+                <div className="max-w-md mx-auto bg-white dark:bg-slate-950 border-2 border-orange-500 rounded-3xl p-6 shadow-2xl space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black uppercase text-orange-400 tracking-wider bg-orange-500/10 border border-orange-500/30 px-2.5 py-1 rounded-full">
+                    <span className="text-[10px] font-black uppercase text-orange-600 dark:text-orange-400 tracking-wider bg-orange-500/10 border border-orange-500/30 px-2.5 py-1 rounded-full">
                       👑 1st Batter in Round 1
                     </span>
                     {draftShuffled && (
-                      <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-1">
+                      <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1">
                         <Check className="w-3 h-3" /> Draft Shuffled
                       </span>
                     )}
@@ -338,13 +338,13 @@ export const GullySinglesMatchCreate: React.FC = () => {
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-400 flex items-center justify-center text-slate-950 font-black text-3xl mx-auto shadow-lg shadow-orange-500/30 mt-2">
                     🏏
                   </div>
-                  <h3 className="text-2xl font-black text-white">
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white">
                     {firstBatter.playerName}
                   </h3>
-                  <div className="text-xs text-slate-400">
+                  <div className="text-xs text-slate-500 dark:text-slate-400">
                     Jersey #{firstBatter.jerseyNumber} • {firstBatter.role}
                   </div>
-                  <div className="text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 py-1.5 px-3 rounded-xl font-semibold inline-block">
+                  <div className="text-[11px] text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 py-1.5 px-3 rounded-xl font-semibold inline-block">
                     Bats 1st alone • When out, Batter #2 takes strike!
                   </div>
                 </div>
@@ -366,20 +366,20 @@ export const GullySinglesMatchCreate: React.FC = () => {
           </div>
 
           {/* BATTING ORDER QUEUE CARDS (Interactive Order Management) */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+          <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
               <div>
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <Trophy className="w-4 h-4 text-amber-400" />
+                <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Trophy className="w-4 h-4 text-amber-500 dark:text-amber-400" />
                   Round 1 Batting Queue ({battingOrder.length} players)
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Batters take turns alone in this exact order. Use arrows to re-order, or click &quot;Make 1st&quot; to set the opening batter.
                 </p>
               </div>
 
-              <div className="text-xs text-slate-400 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
-                Default: <strong className="text-orange-400">{totalOvers} overs</strong> per batter
+              <div className="text-xs text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                Default: <strong className="text-orange-600 dark:text-orange-400">{totalOvers} overs</strong> per batter
               </div>
             </div>
 
@@ -392,8 +392,8 @@ export const GullySinglesMatchCreate: React.FC = () => {
                     key={player.id}
                     className={`p-4 rounded-2xl border transition-all flex items-center justify-between ${
                       isFirst
-                        ? 'bg-gradient-to-r from-orange-500/20 via-amber-500/10 to-slate-950 border-orange-500 shadow-lg ring-1 ring-orange-500/30'
-                        : 'bg-slate-950 border-slate-800 hover:border-slate-700'
+                        ? 'bg-gradient-to-r from-orange-50 dark:from-orange-500/20 via-amber-50/50 dark:via-amber-500/10 to-white dark:to-slate-950 border-orange-500 shadow-md ring-1 ring-orange-500/30'
+                        : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -402,10 +402,10 @@ export const GullySinglesMatchCreate: React.FC = () => {
                           isFirst
                             ? 'bg-orange-500 text-slate-950 shadow-md shadow-orange-500/30'
                             : idx === 1
-                            ? 'bg-slate-700 text-white'
+                            ? 'bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white'
                             : idx === 2
-                            ? 'bg-amber-900/60 text-amber-300'
-                            : 'bg-slate-800 text-slate-400'
+                            ? 'bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300'
+                            : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
                         }`}
                       >
                         #{idx + 1}
@@ -413,15 +413,15 @@ export const GullySinglesMatchCreate: React.FC = () => {
 
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-sm text-white">{player.playerName}</span>
+                          <span className="font-bold text-sm text-slate-900 dark:text-white">{player.playerName}</span>
                           <span className="font-mono text-[10px] text-slate-500 font-bold">
                             #{player.jerseyNumber}
                           </span>
                         </div>
-                        <div className="text-[10px] text-slate-400 flex items-center gap-2 mt-0.5">
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400 flex items-center gap-2 mt-0.5">
                           <span>{player.role}</span>
                           <span>•</span>
-                          <span className={isFirst ? 'text-orange-400 font-bold' : 'text-slate-500'}>
+                          <span className={isFirst ? 'text-orange-600 dark:text-orange-400 font-bold' : 'text-slate-500'}>
                             {isFirst ? 'Opens Round 1' : `Batting Position #${idx + 1}`}
                           </span>
                         </div>
@@ -434,7 +434,7 @@ export const GullySinglesMatchCreate: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => handleMakeFirst(idx)}
-                          className="px-2 py-1 rounded-lg text-[10px] font-bold bg-slate-800 hover:bg-orange-500 hover:text-slate-950 text-slate-300 transition-colors"
+                          className="px-2 py-1 rounded-lg text-[10px] font-bold bg-slate-200 hover:bg-orange-500 hover:text-slate-950 dark:bg-slate-800 dark:hover:bg-orange-500 dark:hover:text-slate-950 text-slate-700 dark:text-slate-300 transition-colors"
                           title="Set as 1st Batter"
                         >
                           Make 1st
@@ -445,7 +445,7 @@ export const GullySinglesMatchCreate: React.FC = () => {
                         type="button"
                         onClick={() => handleMoveUp(idx)}
                         disabled={idx === 0}
-                        className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 disabled:opacity-30 disabled:hover:bg-slate-800"
+                        className="p-1.5 rounded-lg bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 disabled:opacity-30 disabled:hover:bg-slate-200 dark:disabled:hover:bg-slate-800"
                         title="Move Up"
                       >
                         <ArrowUp className="w-3.5 h-3.5" />
@@ -455,7 +455,7 @@ export const GullySinglesMatchCreate: React.FC = () => {
                         type="button"
                         onClick={() => handleMoveDown(idx)}
                         disabled={idx === battingOrder.length - 1}
-                        className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 disabled:opacity-30 disabled:hover:bg-slate-800"
+                        className="p-1.5 rounded-lg bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 disabled:opacity-30 disabled:hover:bg-slate-200 dark:disabled:hover:bg-slate-800"
                         title="Move Down"
                       >
                         <ArrowDown className="w-3.5 h-3.5" />
@@ -467,17 +467,17 @@ export const GullySinglesMatchCreate: React.FC = () => {
             </div>
 
             {/* Tournament Rules Banner */}
-            <div className="bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent border border-orange-500/20 rounded-2xl p-4 flex items-start gap-3 mt-3">
-              <Sparkles className="w-5 h-5 text-orange-400 shrink-0 mt-0.5" />
-              <div className="text-xs text-slate-300 space-y-1">
-                <div className="font-bold text-white">How Gully Singles Rounds Work:</div>
-                <div className="text-slate-400 leading-relaxed">
+            <div className="bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent border border-orange-200 dark:border-orange-500/20 rounded-2xl p-4 flex items-start gap-3 mt-3">
+              <Sparkles className="w-5 h-5 text-orange-500 dark:text-orange-400 shrink-0 mt-0.5" />
+              <div className="text-xs text-slate-700 dark:text-slate-300 space-y-1">
+                <div className="font-bold text-slate-900 dark:text-white">How Gully Singles Rounds Work:</div>
+                <div className="text-slate-600 dark:text-slate-400 leading-relaxed">
                   1. <strong>Round 1</strong>: Batters play individually in the order shown above for {totalOvers} overs each. While one player bats, everyone else bowls and fields.
                 </div>
-                <div className="text-slate-400 leading-relaxed">
-                  2. <strong>Round 2 Qualification</strong>: When all players have batted in Round 1, the <strong className="text-orange-400">highest run scorer</strong> gets to bat first in Round 2, followed by the others ranked by score!
+                <div className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  2. <strong>Round 2 Qualification</strong>: When all players have batted in Round 1, the <strong className="text-orange-600 dark:text-orange-400">highest run scorer</strong> gets to bat first in Round 2, followed by the others ranked by score!
                 </div>
-                <div className="text-slate-400 leading-relaxed">
+                <div className="text-slate-600 dark:text-slate-400 leading-relaxed">
                   3. <strong>End Match Anytime</strong>: Scorer can click the <strong>&quot;End Match&quot;</strong> button at any point to crown the champion and view the complete tournament leaderboard!
                 </div>
               </div>
@@ -508,20 +508,20 @@ export const GullySinglesMatchCreate: React.FC = () => {
       {step === 2 && (
         <div className="space-y-6">
           {/* Overs Selector (Default 2 overs!) */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
+          <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-orange-400" />
+                <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-orange-500 dark:text-orange-400" />
                   Overs Per Batter (Default: 2 Overs)
                 </h3>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                   How many overs will each solo batter face per turn? (Completely customizable)
                 </p>
               </div>
               <div className="text-right">
-                <span className="text-3xl font-black text-orange-400">{totalOvers}</span>
-                <span className="text-xs text-slate-400 ml-1">Overs</span>
+                <span className="text-3xl font-black text-orange-500 dark:text-orange-400">{totalOvers}</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 ml-1">Overs</span>
               </div>
             </div>
 
@@ -537,7 +537,7 @@ export const GullySinglesMatchCreate: React.FC = () => {
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                     totalOvers === ov
                       ? 'bg-orange-500 text-slate-950 shadow-md font-black'
-                      : 'bg-slate-950 border border-slate-800 text-slate-300 hover:border-slate-700'
+                      : 'bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700'
                   }`}
                 >
                   {ov} {ov === 1 ? 'over' : 'overs'}
@@ -545,7 +545,7 @@ export const GullySinglesMatchCreate: React.FC = () => {
               ))}
 
               <div className="flex items-center gap-2 ml-auto">
-                <label className="text-xs text-slate-400 font-semibold">Custom:</label>
+                <label className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Custom:</label>
                 <input
                   type="number"
                   min="1"
@@ -556,20 +556,20 @@ export const GullySinglesMatchCreate: React.FC = () => {
                     const val = parseInt(e.target.value);
                     if (val > 0) setTotalOvers(val);
                   }}
-                  className="w-16 bg-slate-950 border border-slate-700 rounded-xl px-2.5 py-1 text-sm font-bold text-white text-center focus:outline-none"
+                  className="w-16 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-2.5 py-1 text-sm font-bold text-slate-900 dark:text-white text-center focus:outline-none"
                 />
               </div>
             </div>
           </div>
 
           {/* Dismissal Rule Configuration */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
+          <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
             <div>
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <Shield className="w-4 h-4 text-orange-400" />
+              <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <Shield className="w-4 h-4 text-orange-500 dark:text-orange-400" />
                 Dismissal & Next Batter Rule
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                 Choose what happens when a wicket falls during a batter&apos;s turn.
               </p>
             </div>
@@ -579,19 +579,19 @@ export const GullySinglesMatchCreate: React.FC = () => {
                 onClick={() => setSinglesDismissalRule('LAST_WICKET_ENDS_INNINGS')}
                 className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                   singlesDismissalRule === 'LAST_WICKET_ENDS_INNINGS'
-                    ? 'bg-orange-500/10 border-orange-500 text-white shadow-lg'
-                    : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
+                    ? 'bg-orange-50 dark:bg-orange-500/10 border-orange-500 text-slate-900 dark:text-white shadow-lg'
+                    : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="font-extrabold text-sm text-orange-400">
+                  <div className="font-extrabold text-sm text-orange-600 dark:text-orange-400">
                     Wicket Ends Batter&apos;s Turn (Next Batter In)
                   </div>
                   {singlesDismissalRule === 'LAST_WICKET_ENDS_INNINGS' && (
-                    <Check className="w-4 h-4 text-orange-400 font-bold" />
+                    <Check className="w-4 h-4 text-orange-500 dark:text-orange-400 font-bold" />
                   )}
                 </div>
-                <p className="text-xs text-slate-400 mt-2">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-2">
                   Classic street cricket sudden death! When a batter gets out, their individual innings ends immediately, and the next batter in the queue steps up to bat!
                 </p>
               </div>
@@ -600,19 +600,19 @@ export const GullySinglesMatchCreate: React.FC = () => {
                 onClick={() => setSinglesDismissalRule('BATTER_CONTINUES')}
                 className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                   singlesDismissalRule === 'BATTER_CONTINUES'
-                    ? 'bg-orange-500/10 border-orange-500 text-white shadow-lg'
-                    : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
+                    ? 'bg-orange-50 dark:bg-orange-500/10 border-orange-500 text-slate-900 dark:text-white shadow-lg'
+                    : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="font-extrabold text-sm text-orange-400">
+                  <div className="font-extrabold text-sm text-orange-600 dark:text-orange-400">
                     Wickets Recorded (Batter Plays Full Overs)
                   </div>
                   {singlesDismissalRule === 'BATTER_CONTINUES' && (
-                    <Check className="w-4 h-4 text-orange-400 font-bold" />
+                    <Check className="w-4 h-4 text-orange-500 dark:text-orange-400 font-bold" />
                   )}
                 </div>
-                <p className="text-xs text-slate-400 mt-2">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-2">
                   Wickets are credited to bowlers, but the batter continues batting until all configured overs are completed before the next batter enters.
                 </p>
               </div>
@@ -620,19 +620,19 @@ export const GullySinglesMatchCreate: React.FC = () => {
           </div>
 
           {/* Opening Bowler & Venue */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Users className="w-4 h-4 text-cyan-400" />
+          <div className="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Users className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
               Opening Bowler & Match Venue
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs font-bold text-slate-300">Opening Bowler for 1st Batter</label>
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Opening Bowler for 1st Batter</label>
                 <select
                   value={openingBowlerId}
                   onChange={e => setOpeningBowlerId(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 text-xs text-white rounded-xl px-3 py-2 mt-1.5 focus:outline-none focus:border-cyan-500 font-bold"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white rounded-xl px-3 py-2 mt-1.5 focus:outline-none focus:border-cyan-500 font-bold"
                 >
                   {battingOrder.slice(1).map(p => (
                     <option key={p.id} value={p.id}>
@@ -643,13 +643,13 @@ export const GullySinglesMatchCreate: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-300">Match Venue / Ground</label>
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Match Venue / Ground</label>
                 <input
                   type="text"
                   value={venue}
                   onChange={e => setVenue(e.target.value)}
                   placeholder="e.g. Street Turf, Terrace, School Ground"
-                  className="w-full bg-slate-950 border border-slate-700 text-xs text-white rounded-xl px-3 py-2 mt-1.5 focus:outline-none focus:border-orange-500"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white rounded-xl px-3 py-2 mt-1.5 focus:outline-none focus:border-orange-500"
                 />
               </div>
             </div>
@@ -660,7 +660,7 @@ export const GullySinglesMatchCreate: React.FC = () => {
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all"
+              className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all"
             >
               <ChevronLeft className="w-4 h-4" /> Back to Batting Order
             </button>

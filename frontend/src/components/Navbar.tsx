@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
+import { ThemeToggle } from './ThemeToggle.js';
+import { CricketBallIcon } from './CricketIcons.js';
 import {
   LayoutDashboard,
   Users,
@@ -52,32 +54,34 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-md bg-opacity-90">
+    <nav className="bg-white/90 dark:bg-slate-950/90 border-b border-slate-200/90 dark:border-slate-800/80 sticky top-0 z-40 backdrop-blur-md transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Brand */}
           <div className="flex items-center gap-3">
-            <Link to={isAdmin ? '/admin' : '/dashboard'} className="flex items-center gap-2 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-                <Trophy className="w-5 h-5 text-slate-950 font-bold" />
+            <Link to={isAdmin ? '/admin' : '/dashboard'} className="flex items-center gap-2.5 group">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 via-emerald-500 to-amber-400 p-0.5 shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-all">
+                <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center">
+                  <CricketBallIcon className="w-5 h-5" />
+                </div>
               </div>
               <div className="flex flex-col">
-                <span className="font-extrabold text-lg text-white tracking-tight flex items-center gap-1.5">
-                  Pavilion<span className="text-emerald-400">Pro</span>
+                <span className="font-black text-lg text-slate-900 dark:text-white tracking-tight flex items-center gap-1.5 leading-none">
+                  PAVILION<span className="text-emerald-600 dark:text-emerald-400">CRICKET</span>
                   {isAdmin && (
-                    <span className="text-[10px] font-black uppercase tracking-wider bg-amber-400/20 text-amber-400 border border-amber-400/40 px-1.5 py-0.5 rounded">
+                    <span className="text-[9px] font-black uppercase tracking-wider bg-amber-500 text-slate-950 px-1.5 py-0.5 rounded shadow-sm">
                       ADMIN
                     </span>
                   )}
                 </span>
-                <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">
-                  {isAdmin ? 'Admin Console' : 'Cricket Engine'}
+                <span className="text-[9px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-extrabold mt-0.5">
+                  {isAdmin ? 'Tournament Admin' : 'Scoring Console'}
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1 ml-8">
+            {/* Desktop Navigation Links */}
+            <div className="hidden md:flex items-center gap-1.5 ml-8">
               {navLinks.map((link: any) => {
                 const Icon = link.icon;
                 const isActive =
@@ -86,22 +90,26 @@ export const Navbar: React.FC = () => {
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
+                    className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-150 ${
                       isActive
                         ? link.isGully
-                          ? 'bg-amber-500/10 text-amber-400 border border-amber-500/30 shadow-sm'
-                          : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-sm'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                          ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30 shadow-sm'
+                          : 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 shadow-sm'
+                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'
                     }`}
                   >
                     <Icon
                       className={`w-4 h-4 ${
-                        isActive ? (link.isGully ? 'text-amber-400' : 'text-emerald-400') : 'text-slate-400'
+                        isActive
+                          ? link.isGully
+                            ? 'text-amber-600 dark:text-amber-400'
+                            : 'text-emerald-600 dark:text-emerald-400'
+                          : 'text-slate-400 dark:text-slate-400'
                       }`}
                     />
                     {link.name}
                     {link.isGully && (
-                      <span className="text-[9px] font-black uppercase bg-amber-500 text-slate-950 px-1 py-0.5 rounded font-mono">
+                      <span className="text-[9px] font-black uppercase bg-amber-500 text-slate-950 px-1.5 py-0.5 rounded-full font-mono shadow-sm">
                         NEW
                       </span>
                     )}
@@ -111,34 +119,39 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Side - Team Profile & Logout */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* Right Side - Theme Toggle & Team Profile / Actions */}
+          <div className="hidden md:flex items-center gap-3">
+            {/* Theme Toggle Pill */}
+            <ThemeToggle variant="pill" />
+
             {team ? (
-              <div className="flex items-center gap-3 bg-slate-800/60 border border-slate-700/60 px-3.5 py-1.5 rounded-full">
-                <div className={`w-7 h-7 rounded-full font-bold text-xs flex items-center justify-center ${
-                  isAdmin ? 'bg-amber-400 text-slate-950' : 'bg-emerald-500 text-slate-950'
-                }`}>
+              <div className="flex items-center gap-2.5 bg-slate-100/90 dark:bg-slate-800/70 border border-slate-200/90 dark:border-slate-700/60 px-3.5 py-1.5 rounded-full shadow-sm transition-colors">
+                <div
+                  className={`w-7 h-7 rounded-full font-bold text-xs flex items-center justify-center shadow-sm ${
+                    isAdmin ? 'bg-amber-400 text-slate-950' : 'bg-emerald-500 text-white dark:text-slate-950'
+                  }`}
+                >
                   {getInitials(team.teamName)}
                 </div>
                 <div className="flex flex-col text-left">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-xs font-semibold text-slate-200 leading-tight">
+                    <span className="text-xs font-bold text-slate-800 dark:text-slate-200 leading-tight">
                       {team.teamName}
                     </span>
                     {isAdmin && (
-                      <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-400/10 text-amber-400 border border-amber-400/30">
+                      <span className="text-[9px] font-extrabold px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-600 dark:text-amber-400 border border-amber-400/30">
                         ADMIN
                       </span>
                     )}
                   </div>
-                  <span className="text-[10px] text-slate-400 leading-tight">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">
                     @{team.username}
                   </span>
                 </div>
                 <button
                   onClick={handleLogout}
                   title="Logout"
-                  className="ml-2 text-slate-400 hover:text-red-400 transition-colors p-1"
+                  className="ml-1 text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700/60"
                 >
                   <LogOut className="w-4 h-4" />
                 </button>
@@ -147,13 +160,13 @@ export const Navbar: React.FC = () => {
               <div className="flex items-center gap-2">
                 <Link
                   to="/login"
-                  className="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5"
+                  className="text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white px-3 py-1.5"
                 >
                   Sign In
                 </Link>
                 <Link
                   to="/register"
-                  className="text-sm font-medium bg-emerald-500 text-slate-950 font-semibold px-4 py-1.5 rounded-lg hover:bg-emerald-400 transition-colors"
+                  className="text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 dark:bg-emerald-500 dark:hover:bg-emerald-400 text-white dark:text-slate-950 px-4 py-1.5 rounded-xl shadow-sm shadow-emerald-600/20 transition-all"
                 >
                   Register Team
                 </Link>
@@ -161,41 +174,49 @@ export const Navbar: React.FC = () => {
             )}
           </div>
 
-          {/* Mobile hamburger */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile Actions: Theme Toggle + Menu Button */}
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle variant="compact" />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+              aria-label="Toggle Navigation Menu"
+              className="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-800 bg-slate-900/95 px-4 pt-2 pb-4 space-y-2">
+        <div className="md:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg px-4 pt-3 pb-5 space-y-2.5 transition-colors">
           {team && (
-            <div className="flex items-center gap-3 pb-3 border-b border-slate-800 mb-2">
-              <div className={`w-8 h-8 rounded-full font-bold text-xs flex items-center justify-center ${
-                isAdmin ? 'bg-amber-400 text-slate-950' : 'bg-emerald-500 text-slate-950'
-              }`}>
-                {getInitials(team.teamName)}
-              </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-sm font-semibold text-white">{team.teamName}</span>
-                  {isAdmin && (
-                    <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-400 border border-amber-400/40">
-                      ADMIN
-                    </span>
-                  )}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 mb-2">
+              <div className="flex items-center gap-3">
+                <div
+                  className={`w-9 h-9 rounded-full font-bold text-sm flex items-center justify-center ${
+                    isAdmin ? 'bg-amber-400 text-slate-950' : 'bg-emerald-500 text-white dark:text-slate-950'
+                  }`}
+                >
+                  {getInitials(team.teamName)}
                 </div>
-                <span className="text-xs text-slate-400">@{team.username}</span>
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm font-bold text-slate-900 dark:text-white">{team.teamName}</span>
+                    {isAdmin && (
+                      <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-amber-400/20 text-amber-600 dark:text-amber-400 border border-amber-400/40">
+                        ADMIN
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-xs text-slate-500 dark:text-slate-400">@{team.username}</span>
+                </div>
               </div>
+              <ThemeToggle variant="pill" />
             </div>
           )}
+
           {navLinks.map(link => {
             const Icon = link.icon;
             const isActive = location.pathname === link.path;
@@ -204,25 +225,50 @@ export const Navbar: React.FC = () => {
                 key={link.path}
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium ${
+                className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                   isActive
-                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                    : 'text-slate-300 hover:bg-slate-800'
+                    ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20'
+                    : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
-                <Icon className="w-4 h-4" />
-                {link.name}
+                <div className="flex items-center gap-3">
+                  <Icon className="w-4 h-4" />
+                  {link.name}
+                </div>
+                {link.isGully && (
+                  <span className="text-[9px] font-black uppercase bg-amber-500 text-slate-950 px-1.5 py-0.5 rounded-full font-mono">
+                    NEW
+                  </span>
+                )}
               </Link>
             );
           })}
-          {team && (
+
+          {team ? (
             <button
               onClick={handleLogout}
-              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-400 hover:bg-red-500/10 transition-colors"
+              className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
             >
               <LogOut className="w-4 h-4" />
               Logout
             </button>
+          ) : (
+            <div className="pt-2 flex flex-col gap-2">
+              <Link
+                to="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/register"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center py-2 text-sm font-semibold bg-emerald-600 dark:bg-emerald-500 text-white dark:text-slate-950 rounded-xl"
+              >
+                Register Team
+              </Link>
+            </div>
           )}
         </div>
       )}

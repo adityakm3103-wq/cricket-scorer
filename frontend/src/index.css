@@ -3,23 +3,98 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
   body {
-    @apply bg-slate-950 text-slate-100 font-sans antialiased;
+    @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-200 min-h-screen;
   }
 }
 
-/* Custom scrollbars */
+/* Custom Glassmorphism & Card Utility Classes */
+@layer components {
+  .theme-card {
+    @apply bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200/90 dark:border-slate-800/80 shadow-sm shadow-slate-200/50 dark:shadow-black/20 rounded-2xl transition-all duration-200;
+  }
+
+  .theme-card-hover {
+    @apply hover:border-emerald-500/50 dark:hover:border-emerald-500/40 hover:shadow-md hover:shadow-emerald-500/5 transition-all duration-200;
+  }
+
+  .theme-input {
+    @apply bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-all;
+  }
+
+  .theme-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold tracking-wide;
+  }
+
+  .cricket-pill {
+    @apply px-3 py-1.5 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-sm;
+  }
+
+  /* Authentic Cricket Visual Utilities */
+  .cricket-glow-green {
+    box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.35);
+  }
+
+  .cricket-glow-gold {
+    box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.35);
+  }
+
+  .cricket-glow-red {
+    box-shadow: 0 0 25px -5px rgba(239, 68, 68, 0.35);
+  }
+
+  .cricket-seam-border {
+    border-image: repeating-linear-gradient(45deg, #dc2626, #dc2626 8px, #ffffff 8px, #ffffff 16px) 2;
+  }
+
+  .jumbotron-box {
+    @apply bg-slate-950 text-white font-mono tracking-tight border border-slate-800 rounded-2xl shadow-2xl;
+  }
+}
+
+/* Light / Dark Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: transparent;
 }
+
+.light ::-webkit-scrollbar-thumb,
 ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
   background: #334155;
   border-radius: 9999px;
 }
-::-webkit-scrollbar-thumb:hover {
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
   background: #475569;
+}
+
+/* Ambient Stadium Lighting Effects */
+.stadium-bg {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.06) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.04) 0px, transparent 50%);
+}
+
+.dark .stadium-bg {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.06) 0px, transparent 50%);
 }

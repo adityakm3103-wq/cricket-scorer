@@ -1,37 +1,76 @@
 import { useEffect } from 'react';
-import { io, Socket } from 'socket.io-client';
+import { supabase } from '../lib/supabase.js';
 
-let socket: Socket | null = null;
-
-export function getSocket(): Socket {
-  if (!socket) {
-    socket = io('/', {
-      transports: ['websocket', 'polling'],
-      autoConnect: true,
+/**
+ * Broadcast match update across Supabase Realtime channel
+ */
+export async function broadcastMatchUpdate(matchId: string, updatedMatch: any) {
+  try {
+    const channel = supabase.channel(`match:${matchId}`);
+    await channel.send({
+      type: 'broadcast',
+      event: 'match:updated',
+      payload: updatedMatch,
     });
+  } catch (err) {
+    console.warn('Realtime broadcast notice:', err);
   }
-  return socket;
 }
 
-export function useMatchSocket(matchId?: string, onMatchUpdate?: (data: any) => void) {
+/**
+ * Hook to listen for live match updates using Supabase Realtime
+ */
+export function useMatchSocket(
+  matchId?: string,
+  onMatchUpdate?: (data: any) => void
+) {
   useEffect(() => {
-    if (!matchId) return;
+    if (!matchId || !onMatchUpdate) return;
 
-    const s = getSocket();
+    const channel = supabase.channel(`match:${matchId}`, {
+      config: {
+        broadcast: { ack: false, self: false },
+      },
+    });
 
-    s.emit('join:match', matchId);
-
-    const handleUpdate = (updatedMatch: any) => {
-      if (onMatchUpdate) {
-        onMatchUpdate(updatedMatch);
+    // 1. Listen for instant broadcast updates sent by scorer
+    channel.on('broadcast', { event: 'match:updated' }, payload => {
+      if (payload?.payload) {
+        onMatchUpdate(payload.payload);
       }
-    };
+    });
 
-    s.on('match:updated', handleUpdate);
+    // 2. Listen for Postgres changes on deliveries table for this match
+    channel.on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'deliveries',
+      },
+      () => {
+        // Trigger refetch by passing empty signal or callback
+        onMatchUpdate({ __refetch: true });
+      }
+    );
+
+    // 3. Listen for Postgres changes on gully_deliveries table
+    channel.on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'gully_deliveries',
+      },
+      () => {
+        onMatchUpdate({ __refetch: true });
+      }
+    );
+
+    channel.subscribe();
 
     return () => {
-      s.emit('leave:match', matchId);
-      s.off('match:updated', handleUpdate);
+      supabase.removeChannel(channel);
     };
   }, [matchId, onMatchUpdate]);
 }

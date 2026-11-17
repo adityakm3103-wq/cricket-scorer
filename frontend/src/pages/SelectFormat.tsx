@@ -69,15 +69,15 @@ export const SelectFormat: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 py-4">
+    <div className="max-w-5xl mx-auto space-y-8 py-4 transition-colors duration-200">
       <div className="text-center space-y-2">
-        <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+        <span className="text-xs font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-500/20">
           Match Setup • Step 1
         </span>
-        <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+        <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
           Select Match Format
         </h1>
-        <p className="text-sm text-slate-400 max-w-xl mx-auto">
+        <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto font-medium">
           Choose from standard official formats. The cricket engine strictly enforces format-specific over limits, session rules, and bowling constraints.
         </p>
       </div>
@@ -89,38 +89,38 @@ export const SelectFormat: React.FC = () => {
             <div
               key={f.format}
               onClick={() => handleSelect(f.format)}
-              className="bg-slate-900 border border-slate-800 hover:border-emerald-500/50 rounded-3xl p-6 sm:p-7 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10 transition-all cursor-pointer group relative overflow-hidden flex flex-col justify-between"
+              className="bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 rounded-3xl p-6 sm:p-7 shadow-sm hover:shadow-md transition-all cursor-pointer group relative overflow-hidden flex flex-col justify-between"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${f.color} flex items-center justify-center text-slate-950 font-black shadow-lg shadow-black/40 group-hover:scale-110 transition-transform`}>
+                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${f.color} flex items-center justify-center text-white font-black shadow-md group-hover:scale-110 transition-transform`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <span className="text-xs font-bold text-slate-400 bg-slate-800 border border-slate-700 px-3 py-1 rounded-full">
+                  <span className="text-xs font-bold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1 rounded-full">
                     {f.badge}
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                     {f.title}
                   </h3>
-                  <p className="text-xs text-slate-400 mt-1">{f.description}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">{f.description}</p>
                 </div>
 
-                <div className="bg-slate-800/60 rounded-xl p-3 border border-slate-700/60 space-y-1.5 text-xs">
-                  <div className="flex items-center gap-2 text-slate-200 font-semibold">
-                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3 border border-slate-200 dark:border-slate-700/60 space-y-1.5 text-xs">
+                  <div className="flex items-center gap-2 text-slate-800 dark:text-slate-200 font-bold">
+                    <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                     {f.oversDesc}
                   </div>
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300 font-medium">
+                    <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                     {f.bowlerLimit}
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-bold text-emerald-400 group-hover:translate-x-1 transition-transform">
+              <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 transition-transform">
                 <span>Configure Playing XI & Toss</span>
                 <ChevronRight className="w-4 h-4" />
               </div>
