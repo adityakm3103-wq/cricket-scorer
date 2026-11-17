@@ -8,6 +8,10 @@
     "test:backend": "cd backend && npm.cmd test",
     "build:backend": "cd backend && npm.cmd run build",
     "build:frontend": "cd frontend && npm.cmd run build",
-    "seed": "cd backend && npx.cmd tsx src/seed.ts"
+    "seed": "cd backend && npx.cmd tsx src/seed.ts",
+    "cap": "cd frontend && npx.cmd cap",
+    "cap:sync": "cd frontend && npx.cmd cap sync",
+    "cap:open": "cd frontend && npx.cmd cap open android",
+    "build:android": "cd frontend && npm.cmd run cap:build"
   }
 }

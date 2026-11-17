@@ -1,6 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Capacitor } from '@capacitor/core';
+import { App as CapApp } from '@capacitor/app';
 import { ThemeProvider } from './context/ThemeContext.js';
 import { AuthProvider, useAuth } from './context/AuthContext.js';
 import { Layout } from './components/Layout.js';
@@ -81,12 +83,49 @@ const RootRedirect: React.FC = () => {
   return <Navigate to={isAdmin ? '/admin' : '/dashboard'} replace />;
 };
 
+const CapacitorBackButtonHandler: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  React.useEffect(() => {
+    if (!Capacitor.isNativePlatform()) return;
+
+    let isSubscribed = true;
+    let listenerHandle: any = null;
+
+    CapApp.addListener('backButton', () => {
+      const exitPaths = ['/dashboard', '/login', '/admin'];
+      if (exitPaths.includes(location.pathname)) {
+        CapApp.exitApp();
+      } else {
+        navigate(-1);
+      }
+    }).then((handle) => {
+      if (isSubscribed) {
+        listenerHandle = handle;
+      } else {
+        handle.remove();
+      }
+    });
+
+    return () => {
+      isSubscribed = false;
+      if (listenerHandle) {
+        listenerHandle.remove();
+      }
+    };
+  }, [navigate, location]);
+
+  return null;
+};
+
 export const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <AuthProvider>
           <BrowserRouter>
+            <CapacitorBackButtonHandler />
             <Routes>
             {/* Public Routes */}
             <Route path="/login" element={<Login />} />
