@@ -69,19 +69,27 @@ jobs:
 
       - name: Verify APK Generation
         run: |
-          if [ ! -f frontend/android/app/build/outputs/apk/debug/app-debug.apk ]; then
-            echo "ERROR: APK file not found at expected location!"
-            ls -la frontend/android/app/build/outputs/apk/debug/ || true
+          echo "Searching for generated APK files..."
+          find frontend/android -name "*.apk" -ls || true
+          APK_FILE=$(find frontend/android -name "*.apk" | head -n 1)
+          if [ -z "$APK_FILE" ]; then
+            echo "ERROR: No APK file was generated!"
+            echo "### Build Outputs directory contents:"
+            find frontend/android/app/build -maxdepth 4 || true
             exit 1
           fi
+          echo "APK successfully found at: $APK_FILE"
+          echo "APK_FILE=$APK_FILE" >> $GITHUB_ENV
           echo "### APK Generation Succeeded" >> $GITHUB_STEP_SUMMARY
-          echo "APK generated at: \`frontend/android/app/build/outputs/apk/debug/app-debug.apk\`" >> $GITHUB_STEP_SUMMARY
-          ls -lh frontend/android/app/build/outputs/apk/debug/app-debug.apk
+          echo "Successfully generated APK: \`$APK_FILE\`" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          ls -lh "$APK_FILE" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Upload Cricket Scorer APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Cricket-Scorer-APK
-          path: frontend/android/app/build/outputs/apk/debug/app-debug.apk
+          path: ${{ env.APK_FILE }}
           if-no-files-found: error
           retention-days: 30
