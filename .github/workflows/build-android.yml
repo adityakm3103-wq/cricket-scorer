@@ -59,23 +59,29 @@ jobs:
       - name: Build Android Debug APK with Gradle
         working-directory: frontend/android
         run: |
-          ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee build.log || {
-            echo "### Gradle Build Failed" >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
-            tail -n 100 build.log >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
+          ./gradlew :app:assembleDebug --no-daemon --stacktrace > build.log 2>&1 || true
+          echo "### Gradle Build Log" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          tail -n 100 build.log >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          if grep -q "BUILD SUCCESSFUL" build.log; then
+            echo "Gradle build completed successfully."
+          else
+            echo "Gradle build failed."
+            cat build.log
             exit 1
-          }
+          fi
 
       - name: Verify APK Generation
         run: |
-          echo "Searching for generated APK files..."
-          find frontend/android -name "*.apk" -ls || true
+          echo "### File Search in build outputs:" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          find frontend/android -name "*.apk" >> $GITHUB_STEP_SUMMARY 2>&1 || true
+          find frontend/android/app/build -maxdepth 5 >> $GITHUB_STEP_SUMMARY 2>&1 || true
+          echo '```' >> $GITHUB_STEP_SUMMARY
           APK_FILE=$(find frontend/android -name "*.apk" | head -n 1)
           if [ -z "$APK_FILE" ]; then
             echo "ERROR: No APK file was generated!"
-            echo "### Build Outputs directory contents:"
-            find frontend/android/app/build -maxdepth 4 || true
             exit 1
           fi
           echo "APK successfully found at: $APK_FILE"
