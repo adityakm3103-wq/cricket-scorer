@@ -6,6 +6,9 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-apk:
     name: Build & Package Android APK
@@ -60,10 +63,6 @@ jobs:
         working-directory: frontend/android
         run: |
           ./gradlew :app:assembleDebug --no-daemon --stacktrace > build.log 2>&1 || true
-          echo "### Gradle Build Log" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          tail -n 100 build.log >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
           if grep -q "BUILD SUCCESSFUL" build.log; then
             echo "Gradle build completed successfully."
           else
@@ -72,13 +71,25 @@ jobs:
             exit 1
           fi
 
+      - name: Save and Push Build Log
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan ci-logs || git checkout ci-logs
+          git rm -rf . >/dev/null 2>&1 || true
+          if [ -f frontend/android/build.log ]; then
+            cp frontend/android/build.log ./gradle_build.log
+          else
+            echo "No build.log found" > ./gradle_build.log
+          fi
+          git add gradle_build.log
+          git commit -m "ci: upload gradle build log [skip ci]" || true
+          git push origin ci-logs --force || true
+
       - name: Verify APK Generation
         run: |
-          echo "### File Search in build outputs:" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          find frontend/android -name "*.apk" >> $GITHUB_STEP_SUMMARY 2>&1 || true
-          find frontend/android/app/build -maxdepth 5 >> $GITHUB_STEP_SUMMARY 2>&1 || true
-          echo '```' >> $GITHUB_STEP_SUMMARY
+          find frontend/android -name "*.apk" -ls || true
           APK_FILE=$(find frontend/android -name "*.apk" | head -n 1)
           if [ -z "$APK_FILE" ]; then
             echo "ERROR: No APK file was generated!"
