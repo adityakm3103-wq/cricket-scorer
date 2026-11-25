@@ -55,7 +55,7 @@ coverage/
 **/android/.cxx/
 **/android/*.iml
 **/android/captures/
-**/android/app/src/main/assets/public/
-**/android/app/src/main/assets/capacitor.config.json
-**/android/app/src/main/assets/capacitor.plugins.json
+# **/android/app/src/main/assets/public/
+# **/android/app/src/main/assets/capacitor.config.json
+# **/android/app/src/main/assets/capacitor.plugins.json
 

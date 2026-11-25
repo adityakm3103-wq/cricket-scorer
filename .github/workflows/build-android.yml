@@ -46,7 +46,15 @@ jobs:
 
       - name: Build React Application
         working-directory: frontend
-        run: npm run build
+        run: |
+          npm run build
+          echo "Verifying React build output..."
+          ls -la dist
+          ls -la dist/assets || true
+          if [ ! -f dist/index.html ]; then
+            echo "ERROR: dist/index.html does not exist!"
+            exit 1
+          fi
 
       - name: Synchronize Capacitor Android
         working-directory: frontend
@@ -58,6 +66,13 @@ jobs:
             echo '```' >> $GITHUB_STEP_SUMMARY
             exit 1
           }
+          # Guarantee that web build assets are populated into Android assets directory
+          mkdir -p android/app/src/main/assets/public
+          cp -r dist/* android/app/src/main/assets/public/
+          cp capacitor.config.json android/app/src/main/assets/capacitor.config.json
+          echo "Android assets directory verified:"
+          ls -la android/app/src/main/assets/
+          ls -la android/app/src/main/assets/public/
 
       - name: Build Android Debug APK with Gradle
         working-directory: frontend/android
@@ -86,7 +101,7 @@ jobs:
           git commit -m "ci: upload gradle build log [skip ci]" || true
           git push origin ci-logs --force || true
 
-      - name: Verify APK Generation
+      - name: Verify APK Generation & Asset Packaging
         run: |
           find frontend/android -name "*.apk" -ls || true
           APK_FILE=$(find frontend/android -name "*.apk" | head -n 1)
@@ -96,10 +111,22 @@ jobs:
           fi
           echo "APK successfully found at: $APK_FILE"
           echo "APK_FILE=$APK_FILE" >> $GITHUB_ENV
+
+          echo "Verifying web assets inside the APK package..."
+          if ! unzip -l "$APK_FILE" | grep -i "assets/public/index.html"; then
+            echo "CRITICAL ERROR: assets/public/index.html was NOT found inside the generated APK!"
+            exit 1
+          fi
+          echo "SUCCESS: assets/public/index.html confirmed inside APK!"
+
           echo "### APK Generation Succeeded" >> $GITHUB_STEP_SUMMARY
           echo "Successfully generated APK: \`$APK_FILE\`" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           ls -lh "$APK_FILE" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "### Packaged Web Assets (Preview):" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          unzip -l "$APK_FILE" | grep "assets/public" | head -n 20 >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Upload Cricket Scorer APK Artifact
